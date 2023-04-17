@@ -4,6 +4,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from booking.booking_filtration import BookingFiltration
+from booking.booking_report import BookingReport
 
 
 class Booking(webdriver.Chrome):
@@ -80,3 +81,9 @@ class Booking(webdriver.Chrome):
         filtration.apply_star_rating(4, 5)
 
         filtration.sort_price_lowest_first()
+    
+    def report_results(self):
+        hotel_boxes = self.find_element(By.ID, 'hotellist_inner')
+        
+        report = BookingReport(hotel_boxes)
+        report.pull_titles()
