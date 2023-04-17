@@ -3,6 +3,7 @@ import booking.constants as const
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from booking.booking_filtration import BookingFiltration
 
 
 class Booking(webdriver.Chrome):
@@ -73,9 +74,9 @@ class Booking(webdriver.Chrome):
         search_button = self.find_element(
             By.CSS_SELECTOR, 'button[type="submit"]')
         search_button.click()
-    
+
     def apply_filtrations(self):
         filtration = BookingFiltration(driver=self)
         filtration.apply_star_rating(4, 5)
-        
+
         filtration.sort_price_lowest_first()
